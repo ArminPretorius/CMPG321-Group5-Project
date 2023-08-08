@@ -1,1 +1,3 @@
-# CMPG321-Group5-Project
+# CMPG321 Group5 Project
+## Overview
+## Business Rules
