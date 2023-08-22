@@ -6,5 +6,5 @@
 
 ## Conceptual Model Links
 
-https://lucid.app/lucidchart/5eeb1a6f-1222-4ac8-bfec-b841fc3ba624/edit?viewport_loc=-90%2C-61%2C2443%2C1220%2C0_0&invitationId=inv_5757ed61-007f-4ef1-b059-8ffc24d1f90f
-
+[Louis' Model](https://lucid.app/lucidchart/5eeb1a6f-1222-4ac8-bfec-b841fc3ba624/edit?viewport_loc=-90%2C-61%2C2443%2C1220%2C0_0&invitationId=inv_5757ed61-007f-4ef1-b059-8ffc24d1f90f)\
+[Armin's Model](https://lucid.app/lucidchart/6c13dfef-0b10-4917-ab7c-c69e6421ca60/edit?viewport_loc=247%2C-83%2C2219%2C1151%2C0_0&invitationId=inv_1fc36a63-f658-40dd-8e61-3a93a77bf9d0)
