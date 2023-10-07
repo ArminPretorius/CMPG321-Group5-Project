@@ -71,8 +71,8 @@ CREATE TABLE ROAD_EVENT(
     segment_id INT NOT NULL CONSTRAINT Event_Segment_FK REFERENCES STREET_SEGMENT(segment_id),
     event_type VARCHAR(50) NOT NULL,
     event_description VARCHAR(100) NOT NULL,
-    event_start_time DATE NOT NULL,
-    event_end_time DATE NOT NULL
+    event_start_datetime DATE NOT NULL,
+    event_end_datetime DATE NOT NULL
 );
 
 CREATE SEQUENCE seq_PTStop
@@ -144,7 +144,7 @@ CREATE TABLE TRAFFIC_DATA(
     tdata_id INT NOT NULL CONSTRAINT TData_PK PRIMARY KEY,
     segment_id INT NOT NULL CONSTRAINT TData_Segment_FK REFERENCES STREET_SEGMENT(segment_id),
     congestion_id INT NOT NULL CONSTRAINT TData_Congestion_FK REFERENCES CONGESTION_LEVEL(congestion_id),
-    tdata_time DATE NOT NULL,
+    tdata_datetime DATE NOT NULL,
     tdata_average_speed NUMBER(8,2) NOT NULL,
     tdata_traffic_volume INT NOT NULL
 );
@@ -161,8 +161,8 @@ CREATE TABLE TRAFFIC_CONDITION(
     segment_id INT NOT NULL CONSTRAINT TrafCond_Segment_FK REFERENCES STREET_SEGMENT(segment_id),
     traf_cond_type VARCHAR(50) NOT NULL,
     traf_cond_description VARCHAR(100) NOT NULL,
-    traf_cond_start_date DATE NOT NULL,
-    traf_cond_end_date DATE NOT NULL
+    traf_cond_start_datetime DATE NOT NULL,
+    traf_cond_end_datetime DATE NOT NULL
 );
 
 CREATE SEQUENCE seq_StreetView
@@ -190,8 +190,8 @@ CREATE TABLE ROAD_CONDITION(
     segment_id INT NOT NULL CONSTRAINT RoadCond_Segment_FK REFERENCES STREET_SEGMENT(segment_id),
     road_cond_type VARCHAR(50) NOT NULL,
     road_cond_description VARCHAR(100) NOT NULL,
-    road_cond_start_date DATE NOT NULL,
-    road_cond_end_date DATE NOT NULL
+    road_cond_start_datetime DATE NOT NULL,
+    road_cond_end_datetime DATE NOT NULL
 );
 
 CREATE SEQUENCE seq_POI
@@ -271,7 +271,7 @@ NOCYCLE;
 CREATE TABLE PEDESTRIAN_DATA(
     pdata_id INT NOT NULL CONSTRAINT PData_PK PRIMARY KEY,
     crossing_id INT NOT NULL CONSTRAINT PData_Crossing_FK REFERENCES PEDESTRIAN_CROSSING(crossing_id),
-    pdata_date DATE NOT NULL,
+    pdata_datetime DATE NOT NULL,
     pdata_average_speed NUMBER(8,2) NOT NULL,
     pdata_pedestrian_volume INT NOT NULL,
     pdata_congestion_level INT NOT NULL
