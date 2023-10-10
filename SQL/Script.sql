@@ -52,8 +52,8 @@ NOCYCLE;
 CREATE TABLE STREET_SEGMENT(
     segment_id INT NOT NULL CONSTRAINT Segment_PK PRIMARY KEY,
     street_id INT NOT NULL CONSTRAINT Segment_Street_FK REFERENCES STREET(street_id),
-    segment_length NUMBER(8,2) NOT NULL,
-    segment_direction NUMBER(8,2) NOT NULL,
+    segment_length NUMBER(8,3) NOT NULL,
+    segment_direction NUMBER(8,3) NOT NULL,
     segment_road_type VARCHAR(50) NOT NULL,
     segment_start_loc_id INT NOT NULL CONSTRAINT Segment_StartLoc_FK REFERENCES LOCATION(loc_id),
     segment_end_loc_id INT NOT NULL CONSTRAINT Segment_EndLoc_FK REFERENCES LOCATION(loc_id)
@@ -145,7 +145,7 @@ CREATE TABLE TRAFFIC_DATA(
     segment_id INT NOT NULL CONSTRAINT TData_Segment_FK REFERENCES STREET_SEGMENT(segment_id),
     congestion_id INT NOT NULL CONSTRAINT TData_Congestion_FK REFERENCES CONGESTION_LEVEL(congestion_id),
     tdata_datetime DATE NOT NULL,
-    tdata_average_speed NUMBER(8,2) NOT NULL,
+    tdata_average_speed NUMBER(8,3) NOT NULL,
     tdata_traffic_volume INT NOT NULL
 );
 
@@ -240,8 +240,9 @@ NOCYCLE;
 
 CREATE TABLE PEDESTRIAN_WALKWAY(
     walkway_id INT NOT NULL CONSTRAINT Walkway_PK PRIMARY KEY,
+    segment_id INT NOT NULL CONSTRAINT Walkway_Segment_FK REFERENCES STREET_SEGMENT(segment_id),
     walkway_type VARCHAR(50) NOT NULL,
-    walkway_width NUMBER(8,2) NOT NULL,
+    walkway_width NUMBER(8,3) NOT NULL,
     walkway_accessible VARCHAR(50) NOT NULL,
     walkway_surface VARCHAR(50) NOT NULL
 );
@@ -272,7 +273,7 @@ CREATE TABLE PEDESTRIAN_DATA(
     pdata_id INT NOT NULL CONSTRAINT PData_PK PRIMARY KEY,
     crossing_id INT NOT NULL CONSTRAINT PData_Crossing_FK REFERENCES PEDESTRIAN_CROSSING(crossing_id),
     pdata_datetime DATE NOT NULL,
-    pdata_average_speed NUMBER(8,2) NOT NULL,
+    pdata_average_speed NUMBER(8,3) NOT NULL,
     pdata_pedestrian_volume INT NOT NULL,
     pdata_congestion_level INT NOT NULL
 );

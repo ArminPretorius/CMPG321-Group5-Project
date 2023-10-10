@@ -18,6 +18,6 @@ INSERT INTO ROAD_CONDITION (road_cond_id, segment_id, road_cond_type, road_cond_
 INSERT INTO POINT_OF_INTEREST (poi_id, street_id, poi_name, poi_description, poi_category, poi_loc_id) VALUES (seq_POI.nextval,1,'name','description','category',1);
 INSERT INTO INTERSECTION (intersection_id, first_street_id, second_street_id, intersection_loc_id) VALUES (seq_Intersection.nextval,1,1,1);
 INSERT INTO INTERSECTING_SEGMENTS (segment_id, intersection_start_id, intersection_end_id) VALUES (1,1,1);
-INSERT INTO PEDESTRIAN_WALKWAY (walkway_id, walkway_type, walkway_width, walkway_accessible, walkway_surface) VALUES (seq_PedestrianWalkway.nextval,'type',0.213,'accessible','surface');
+INSERT INTO PEDESTRIAN_WALKWAY (walkway_id, segment_id, walkway_type, walkway_width, walkway_accessible, walkway_surface) VALUES (seq_PedestrianWalkway.nextval,1,'type',0.213,'accessible','surface');
 INSERT INTO PEDESTRIAN_CROSSING (crossing_id, intersection_id, crossing_type, crossing_lights, crossing_signal) VALUES (seq_PedestrianCrossing.nextval,1,'type','lights','signal');
 INSERT INTO PEDESTRIAN_DATA (pdata_id, crossing_id, pdata_datetime, pdata_average_speed, pdata_pedestrian_volume, pdata_congestion_level) VALUES (seq_PedestrianData.nextval,1,TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),0.213,1,1);
