@@ -85,7 +85,7 @@ NOCYCLE;
 CREATE TABLE PUBLIC_TRANS_STOP(
     ptstop_id INT NOT NULL CONSTRAINT PTStop_PK PRIMARY KEY,
     segment_id INT NOT NULL CONSTRAINT PTStop_Segment_FK REFERENCES STREET_SEGMENT(segment_id),
-    ptstop_name VARCHAR(50) NOT NULL,
+    ptstop_name VARCHAR(50),
     ptstop_type VARCHAR(50) NOT NULL,
     ptstop_loc_id INT NOT NULL CONSTRAINT PTStop_Loc_FK REFERENCES LOCATION(loc_id)
 );
@@ -101,8 +101,8 @@ CREATE TABLE SPEED_LIMIT(
     slimit_id INT NOT NULL CONSTRAINT SLimit_PK PRIMARY KEY,
     segment_id INT NOT NULL CONSTRAINT SpeedLimit_Segment_FK REFERENCES STREET_SEGMENT(segment_id),
     slimit_value INT NOT NULL,
-    slimit_start_time DATE NOT NULL,
-    slimit_end_time DATE NOT NULL
+    slimit_start_time DATE,
+    slimit_end_time DATE
 );
 
 CREATE SEQUENCE seq_RoadObject
@@ -140,13 +140,30 @@ INCREMENT BY 1
 NOCACHE
 NOCYCLE;
 
-CREATE TABLE TRAFFIC_DATA(
+CREATE TABLE LIVE_TRAFFIC_DATA(
     tdata_id INT NOT NULL CONSTRAINT TData_PK PRIMARY KEY,
     segment_id INT NOT NULL CONSTRAINT TData_Segment_FK REFERENCES STREET_SEGMENT(segment_id),
     congestion_id INT NOT NULL CONSTRAINT TData_Congestion_FK REFERENCES CONGESTION_LEVEL(congestion_id),
     tdata_datetime DATE NOT NULL,
     tdata_average_speed NUMBER(8,3) NOT NULL,
-    tdata_traffic_volume INT NOT NULL
+    tdata_traffic_volume INT NOT NULL,
+    tdata_live_travel_time NUMBER(8,3) NOT NULL
+);
+
+CREATE SEQUENCE seq_TrafficPred
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
+CREATE TABLE TRAFFIC_DATA_PREDICTOR(
+    predictor_id INT NOT NULL CONSTRAINT TDataPred_PK PRIMARY KEY,
+    segment_id INT NOT NULL CONSTRAINT TDataPred_Segment_FK REFERENCES STREET_SEGMENT(segment_id),
+    predictor_day_of_week INT NOT NULL,
+    predictor_hour_of_day INT NOT NULL,
+    predictor_travel_time NUMBER(8,3) NOT NULL,
+    predictor_speed NUMBER(8,3) NOT NULL
 );
 
 CREATE SEQUENCE seq_TrafficCond
@@ -162,7 +179,7 @@ CREATE TABLE TRAFFIC_CONDITION(
     traf_cond_type VARCHAR(50) NOT NULL,
     traf_cond_description VARCHAR(100) NOT NULL,
     traf_cond_start_datetime DATE NOT NULL,
-    traf_cond_end_datetime DATE NOT NULL
+    traf_cond_end_datetime DATE
 );
 
 CREATE SEQUENCE seq_StreetView
@@ -191,7 +208,7 @@ CREATE TABLE ROAD_CONDITION(
     road_cond_type VARCHAR(50) NOT NULL,
     road_cond_description VARCHAR(100) NOT NULL,
     road_cond_start_datetime DATE NOT NULL,
-    road_cond_end_datetime DATE NOT NULL
+    road_cond_end_datetime DATE
 );
 
 CREATE SEQUENCE seq_POI
@@ -258,8 +275,8 @@ CREATE TABLE PEDESTRIAN_CROSSING(
     crossing_id INT NOT NULL CONSTRAINT Crossing_PK PRIMARY KEY,
     intersection_id INT NOT NULL CONSTRAINT PedCross_Intersection_FK REFERENCES INTERSECTION(intersection_id),
     crossing_type VARCHAR(50) NOT NULL,
-    crossing_lights VARCHAR(50) NOT NULL,
-    crossing_signal VARCHAR(50) NOT NULL
+    crossing_lights VARCHAR(50),
+    crossing_signal VARCHAR(50)
 );
 
 CREATE SEQUENCE seq_PedestrianData
@@ -271,7 +288,7 @@ NOCYCLE;
 
 CREATE TABLE PEDESTRIAN_DATA(
     pdata_id INT NOT NULL CONSTRAINT PData_PK PRIMARY KEY,
-    crossing_id INT NOT NULL CONSTRAINT PData_Crossing_FK REFERENCES PEDESTRIAN_CROSSING(crossing_id),
+    walkway_id INT NOT NULL CONSTRAINT PData_Walkway_FK REFERENCES PEDESTRIAN_WALKWAY(walkway_id),
     pdata_datetime DATE NOT NULL,
     pdata_average_speed NUMBER(8,3) NOT NULL,
     pdata_pedestrian_volume INT NOT NULL,

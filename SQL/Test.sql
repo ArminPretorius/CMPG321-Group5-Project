@@ -9,7 +9,8 @@ INSERT INTO SPEED_LIMIT (slimit_id, segment_id, slimit_value, slimit_start_time,
 -- SELECT TO_CHAR(slimit_start_time, 'HH24:MI:SS') AS Start_Time FROM SPEED_LIMIT;
 INSERT INTO ROAD_OBJECT (object_id, segment_id, object_type, object_description, object_loc_id) VALUES (seq_RoadObject.nextval,1,'type','description',1);
 INSERT INTO CONGESTION_LEVEL (congestion_id, congestion_type, congestion_description) VALUES (seq_Congestion.nextval,'type','description');
-INSERT INTO TRAFFIC_DATA (tdata_id, segment_id, congestion_id, tdata_datetime, tdata_average_speed, tdata_traffic_volume) VALUES (seq_TrafficData.nextval,1,1,TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),60,10);
+INSERT INTO LIVE_TRAFFIC_DATA (tdata_id, segment_id, congestion_id, tdata_datetime, tdata_average_speed, tdata_traffic_volume, tdata_live_travel_time) VALUES (seq_TrafficData.nextval,1,1,TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),60,10,10.1);
+INSERT INTO TRAFFIC_DATA_PREDICTOR (predictor_id, segment_id, predictor_day_of_week, predictor_hour_of_day, predictor_travel_time, predictor_speed) VALUES (seq_TrafficPred.nextval,1,1,2,10.1,10.1);
 INSERT INTO TRAFFIC_CONDITION (traf_cond_id, segment_id, traf_cond_type, traf_cond_description, traf_cond_start_datetime, traf_cond_end_datetime) VALUES (seq_TrafficCond.nextval,1,'type','description',TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
 -- SELECT TO_CHAR(traf_cond_start_date, 'DD-MON-YYYY HH24:MI:SS') AS Start_Time FROM TRAFFIC_CONDITION;
 INSERT INTO STREET_VIEW (street_view_id, segment_id, street_view_url) VALUES (seq_StreetView.nextval,1,'www.google.com');
@@ -20,4 +21,4 @@ INSERT INTO INTERSECTION (intersection_id, first_street_id, second_street_id, in
 INSERT INTO INTERSECTING_SEGMENTS (segment_id, intersection_start_id, intersection_end_id) VALUES (1,1,1);
 INSERT INTO PEDESTRIAN_WALKWAY (walkway_id, segment_id, walkway_type, walkway_width, walkway_accessible, walkway_surface) VALUES (seq_PedestrianWalkway.nextval,1,'type',0.213,'accessible','surface');
 INSERT INTO PEDESTRIAN_CROSSING (crossing_id, intersection_id, crossing_type, crossing_lights, crossing_signal) VALUES (seq_PedestrianCrossing.nextval,1,'type','lights','signal');
-INSERT INTO PEDESTRIAN_DATA (pdata_id, crossing_id, pdata_datetime, pdata_average_speed, pdata_pedestrian_volume, pdata_congestion_level) VALUES (seq_PedestrianData.nextval,1,TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),0.213,1,1);
+INSERT INTO PEDESTRIAN_DATA (pdata_id, walkway_id, pdata_datetime, pdata_average_speed, pdata_pedestrian_volume, pdata_congestion_level) VALUES (seq_PedestrianData.nextval,1,TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),0.213,1,1);
