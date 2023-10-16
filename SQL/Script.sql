@@ -16,17 +16,17 @@ CREATE TABLE LOCATION(
     loc_postal VARCHAR(5) NOT NULL
 );
 
-CREATE SEQUENCE seq_SateliteView
+CREATE SEQUENCE seq_SatelliteView
 MINVALUE 1
 START WITH 1
 INCREMENT BY 1
 NOCACHE
 NOCYCLE;
 
-CREATE TABLE SATELITE_VIEW(
-    satelite_view_id INT NOT NULL CONSTRAINT SateliteView_PK PRIMARY KEY,
-    loc_id INT NOT NULL CONSTRAINT SateliteView_Location_FK REFERENCES LOCATION(loc_id),
-    satelite_view_url VARCHAR(100) NOT NULL
+CREATE TABLE SATELLITE_VIEW(
+    satellite_view_id INT NOT NULL CONSTRAINT SatelliteView_PK PRIMARY KEY,
+    loc_id INT NOT NULL CONSTRAINT SatelliteView_Location_FK REFERENCES LOCATION(loc_id),
+    satellite_view_url VARCHAR(100) NOT NULL
 );
 
 CREATE SEQUENCE seq_Street
@@ -260,7 +260,7 @@ CREATE TABLE PEDESTRIAN_WALKWAY(
     segment_id INT NOT NULL CONSTRAINT Walkway_Segment_FK REFERENCES STREET_SEGMENT(segment_id),
     walkway_type VARCHAR(50) NOT NULL,
     walkway_width NUMBER(8,3) NOT NULL,
-    walkway_accessible VARCHAR(50) NOT NULL,
+    walkway_accessibility VARCHAR(50) NOT NULL,
     walkway_surface VARCHAR(50) NOT NULL
 );
 
