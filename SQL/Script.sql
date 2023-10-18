@@ -1,3 +1,5 @@
+-- Location Sequence and Table Creation
+
 CREATE SEQUENCE seq_Location
 MINVALUE 1
 START WITH 1
@@ -16,6 +18,8 @@ CREATE TABLE LOCATION(
     loc_postal VARCHAR(5) NOT NULL
 );
 
+-- Satellite View Sequence and Table Creation
+
 CREATE SEQUENCE seq_SatelliteView
 MINVALUE 1
 START WITH 1
@@ -29,6 +33,8 @@ CREATE TABLE SATELLITE_VIEW(
     satellite_view_url VARCHAR(100) NOT NULL
 );
 
+-- Street Sequence and Table Creation
+
 CREATE SEQUENCE seq_Street
 MINVALUE 1
 START WITH 1
@@ -41,6 +47,8 @@ CREATE TABLE STREET(
     loc_id INT NOT NULL CONSTRAINT Street_Location_FK REFERENCES LOCATION(loc_id),
     street_name VARCHAR(50) NOT NULL
 );
+
+-- Street Segment Sequence and Table Creation
 
 CREATE SEQUENCE seq_Segment
 MINVALUE 1
@@ -59,6 +67,8 @@ CREATE TABLE STREET_SEGMENT(
     segment_end_loc_id INT NOT NULL CONSTRAINT Segment_EndLoc_FK REFERENCES LOCATION(loc_id)
 );
 
+-- Road Event Sequence and Table Creation
+
 CREATE SEQUENCE seq_Event
 MINVALUE 1
 START WITH 1
@@ -75,6 +85,8 @@ CREATE TABLE ROAD_EVENT(
     event_end_datetime DATE NOT NULL
 );
 
+-- Public Transport Stop Sequence and Table Creation
+
 CREATE SEQUENCE seq_PTStop
 MINVALUE 1
 START WITH 1
@@ -89,6 +101,8 @@ CREATE TABLE PUBLIC_TRANS_STOP(
     ptstop_type VARCHAR(50) NOT NULL,
     ptstop_loc_id INT NOT NULL CONSTRAINT PTStop_Loc_FK REFERENCES LOCATION(loc_id)
 );
+
+-- Speed Limit Sequence and Table Creation
 
 CREATE SEQUENCE seq_SpeedLimit
 MINVALUE 1
@@ -105,6 +119,8 @@ CREATE TABLE SPEED_LIMIT(
     slimit_end_time DATE
 );
 
+-- Road Object Sequence and Table Creation
+
 CREATE SEQUENCE seq_RoadObject
 MINVALUE 1
 START WITH 1
@@ -120,6 +136,8 @@ CREATE TABLE ROAD_OBJECT(
     object_loc_id INT NOT NULL CONSTRAINT Object_Loc_FK REFERENCES LOCATION(loc_id)
 );
 
+-- Congestion Level Sequence and Table Creation
+
 CREATE SEQUENCE seq_Congestion
 MINVALUE 1
 START WITH 1
@@ -132,6 +150,8 @@ CREATE TABLE CONGESTION_LEVEL(
     congestion_type VARCHAR(50) NOT NULL,
     congestion_description VARCHAR(100) NOT NULL
 );
+
+-- Live Traffic Data Sequence and Table Creation
 
 CREATE SEQUENCE seq_TrafficData
 MINVALUE 1
@@ -150,6 +170,8 @@ CREATE TABLE LIVE_TRAFFIC_DATA(
     tdata_live_travel_time NUMBER(8,3) NOT NULL
 );
 
+-- Traffic Data Predictor Sequence and Table Creation
+
 CREATE SEQUENCE seq_TrafficPred
 MINVALUE 1
 START WITH 1
@@ -165,6 +187,8 @@ CREATE TABLE TRAFFIC_DATA_PREDICTOR(
     predictor_travel_time NUMBER(8,3) NOT NULL,
     predictor_speed NUMBER(8,3) NOT NULL
 );
+
+-- Traffic Condition Sequence and Table Creation
 
 CREATE SEQUENCE seq_TrafficCond
 MINVALUE 1
@@ -182,6 +206,8 @@ CREATE TABLE TRAFFIC_CONDITION(
     traf_cond_end_datetime DATE
 );
 
+-- Street View Sequence and Table Creation
+
 CREATE SEQUENCE seq_StreetView
 MINVALUE 1
 START WITH 1
@@ -194,6 +220,8 @@ CREATE TABLE STREET_VIEW(
     segment_id INT NOT NULL CONSTRAINT StreetView_Segment_FK REFERENCES STREET_SEGMENT(segment_id),
     street_view_url VARCHAR(100) NOT NULL
 );
+
+-- Road Condition Sequence and Table Creation
 
 CREATE SEQUENCE seq_RoadCond
 MINVALUE 1
@@ -211,6 +239,8 @@ CREATE TABLE ROAD_CONDITION(
     road_cond_end_datetime DATE
 );
 
+-- Point of Interest Sequence and Table Creation
+
 CREATE SEQUENCE seq_POI
 MINVALUE 1
 START WITH 1
@@ -227,6 +257,8 @@ CREATE TABLE POINT_OF_INTEREST(
     poi_loc_id INT NOT NULL CONSTRAINT POI_Loc_FK REFERENCES LOCATION(loc_id)
 );
 
+-- Intersection Sequence and Table Creation
+
 CREATE SEQUENCE seq_Intersection
 MINVALUE 1
 START WITH 1
@@ -241,12 +273,16 @@ CREATE TABLE INTERSECTION(
     intersection_loc_id INT NOT NULL CONSTRAINT Intersection_Loc_FK REFERENCES LOCATION(loc_id)
 );
 
+-- Intersecting Segments Table Creation
+
 CREATE TABLE INTERSECTING_SEGMENTS(
     segment_id INT NOT NULL CONSTRAINT Intersecting_Segment_FK REFERENCES STREET_SEGMENT(segment_id),
     intersection_start_id INT NOT NULL CONSTRAINT Intersecting_Start_FK REFERENCES INTERSECTION(intersection_id),
     intersection_end_id INT NOT NULL CONSTRAINT Intersecting_End_FK REFERENCES INTERSECTION(intersection_id),
     CONSTRAINT Intersecting_PK PRIMARY KEY (segment_id, intersection_start_id, intersection_end_id)
 );
+
+-- Pedestrian Walkway Sequence and Table Creation
 
 CREATE SEQUENCE seq_PedestrianWalkway
 MINVALUE 1
@@ -264,6 +300,8 @@ CREATE TABLE PEDESTRIAN_WALKWAY(
     walkway_surface VARCHAR(50) NOT NULL
 );
 
+-- Pedestrian Crossing Sequence and Table Creation
+
 CREATE SEQUENCE seq_PedestrianCrossing
 MINVALUE 1
 START WITH 1
@@ -278,6 +316,8 @@ CREATE TABLE PEDESTRIAN_CROSSING(
     crossing_lights VARCHAR(50),
     crossing_signal VARCHAR(50)
 );
+
+-- Pedestrian Data Sequence and Table Creation
 
 CREATE SEQUENCE seq_PedestrianData
 MINVALUE 1
